@@ -1,0 +1,54 @@
+*/Talya Sterman 316244243
+Renana Nefesh 206123077
+
+Github Research
+In this program we get from Githubs API all information on a user the user submitted.
+Search button: We get the information from the githubs API via fetch. than we fatch the repositories and followers
+of the user.
+If the numbers of the followers/repositories is 0 it will show "no followers/repositories".
+
+Save button: you can save as a "favorite". The program checks if there is such a user in Github - if yes it will
+save. If not it will show there is no such user and wont save.
+It is not possible to save the same person more than once.
+The list of saved is saved on a local server.
+A local server saves and keeps the list of names.
+We approach the server with a fetch with POST to the router "/save"
+On server side there is a global array that saves the name and url.
+
+Delete: delete is done like the save in the server.
+Only difference is the path which is /delete and the functionality to delete on not to save
+
+Description of AJAX calls:
+1. AJAX call of a user in github:
+URL= 'https://api.github.com/users/' + the name the user submitted
+Parameters= the url
+answer: json with all information of the user: name, html_url, num of repositories, num of followers
+repos_url, followers_url
+2. AJAX call of a reposetory of user:
+URL= repos_url that was received in the json of the first fetch
+Parameters= repos_url
+answer: json of repositories each have name and html url
+3. AJAX call of a followers of user:
+URL= followers_url that was received in the json of the first fetch
+Parameters= followers_url
+answer: json of followers each have name and html url
+2.
+First we fetched the user from github.
+Then we did a fetch for the repositories and fetch for followers.
+In different listeners we fetched to the server to save/delete.
+3.
+The server is local and is open to connection of fetches with /save,/delete
+/save: is type Post, Url:/save, Parameters received: function(req, res, next),
+parameters sent: save_address, {method: 'POST', body: JSON.stringify(data),headers: {'Content-Type': 'application/Json'}
+when save_address include '/users/save'.
+answer: json that include the name and message
+/delete: is type Post, Url:/delete, Parameters received: function(req, res, next),
+parameters sent: delete_address, {method: 'POST', body: JSON.stringify(data),headers: { 'Content-Type':'application/Json'}})
+when delete_address include '/users/delete'.
+answer: json that include the name and message
+
+
+
+
+
+
